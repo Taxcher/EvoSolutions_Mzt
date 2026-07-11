@@ -23,5 +23,12 @@ body {
 .Contacto {
     position: relative;
     top: 40px;
+    left: 40px;
     padding-bottom: 40px;
+}
+
+.social {
+    position: absolute;
+    left: 500px;
+    bottom: 40px;
 }
