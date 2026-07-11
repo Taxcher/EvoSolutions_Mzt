@@ -1,34 +1,547 @@
-#logoMzt {
-    position: relative;
-    left: 230px;
-    bottom: 60px;
+/* Import Google Fonts for a clean, modern aesthetic */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+:root {
+    /* Design Tokens - Curated Modern Dark Palette */
+    --bg-base: #060913;
+    --bg-surface: rgba(13, 20, 38, 0.65);
+    --bg-surface-hover: rgba(22, 32, 59, 0.8);
+
+    --color-primary: #00f2fe;
+    /* Futuristic Cyan */
+    --color-secondary: #4facfe;
+    /* Electric Blue */
+    --color-accent: #8a2be2;
+    /* Neon Purple */
+
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --text-inverse: #060913;
+
+    --border-color: rgba(255, 255, 255, 0.08);
+    --border-glow: rgba(0, 242, 254, 0.35);
+
+    --font-heading: 'Outfit', sans-serif;
+    --font-body: 'Inter', sans-serif;
+
+    --shadow-subtle: 0 4px 20px -2px rgba(0, 0, 0, 0.3);
+    --shadow-neon: 0 0 25px rgba(0, 242, 254, 0.2);
+
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-header {
-    height: 80px;
+/* Reset and Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.opciones {
-    position: absolute;
-    top: 30px;
-    right: 50px;
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
 }
 
 body {
+    background-color: var(--bg-base);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+    /* Subtle background grid pattern for depth */
+    background-image:
+        radial-gradient(circle at 10% 20%, rgba(138, 43, 226, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(0, 242, 254, 0.08) 0%, transparent 40%);
+    background-attachment: fixed;
+}
+
+/* Utility Layouts */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* Scrollbar Customization */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-base);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #1b2640;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-secondary);
+}
+
+/* Header & Sticky Navigation */
+header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 80px;
+    z-index: 1000;
+    background: rgba(6, 9, 19, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+    transition: var(--transition-normal);
+}
+
+header .nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: var(--transition-fast);
+}
+
+.brand:hover {
+    opacity: 0.9;
+}
+
+#logoMzt {
+    height: 44px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 0 8px rgba(0, 242, 254, 0.3));
+}
+
+.brand h1 {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #fff 30%, var(--color-secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Desktop Navigation Menu */
+.opciones ul {
+    display: flex;
+    list-style: none;
+    gap: 32px;
+    align-items: center;
+}
+
+.opciones a {
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: var(--transition-fast);
+    position: relative;
+    padding: 6px 0;
+}
+
+.opciones a::after {
+    content: '';
     position: absolute;
-    right: 20px;
-    left: 20px;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+    transition: var(--transition-fast);
+    border-radius: 2px;
+}
+
+.opciones a:hover {
+    color: var(--text-primary);
+}
+
+.opciones a:hover::after {
+    width: 100%;
+}
+
+/* Mobile Menu Button */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 26px;
+    height: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--text-primary);
+    border-radius: 2px;
+    transition: var(--transition-normal);
+}
+
+/* Hero Section (Inicio) */
+.Inicio {
+    padding: 120px 0 80px 0;
+    position: relative;
+    text-align: center;
+}
+
+.Inicio h2 {
+    font-family: var(--font-heading);
+    font-size: 2.8rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 24px;
+    background: linear-gradient(135deg, #ffffff 40%, #a5b4fc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.Inicio p {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    max-width: 750px;
+    margin: 0 auto 36px auto;
+    font-weight: 300;
+}
+
+/* CTA Button */
+.btn-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 30px;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text-inverse);
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    border: none;
+    border-radius: 30px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: var(--transition-normal);
+    box-shadow: 0 4px 15px rgba(0, 242, 254, 0.3);
+}
+
+.btn-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 242, 254, 0.45), var(--shadow-neon);
+}
+
+/* Services Section */
+.Servicios {
+    padding: 80px 0;
+}
+
+.Servicios h2 {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 48px;
+    position: relative;
+}
+
+.Servicios h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+    margin: 12px auto 0 auto;
+    border-radius: 2px;
+}
+
+/* Grid Layout for Cards */
+.Servicios .row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+}
+
+.card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 32px 24px;
+    transition: var(--transition-normal);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0, 242, 254, 0.05) 0%, transparent 100%);
+    opacity: 0;
+    transition: var(--transition-normal);
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    border-color: var(--border-glow);
+    box-shadow: var(--shadow-subtle), 0 10px 30px -10px rgba(0, 242, 254, 0.15);
+    background: var(--bg-surface-hover);
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+/* Card Elements */
+.card-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 54px;
+    height: 54px;
+    border-radius: 12px;
+    background: rgba(0, 242, 254, 0.1);
+    color: var(--color-primary);
+    margin-bottom: 24px;
+    transition: var(--transition-normal);
+}
+
+.card:hover .card-icon {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    color: var(--text-inverse);
+    box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
+}
+
+.card-title {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 14px;
+    line-height: 1.3;
+}
+
+.card-text {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.6;
+}
+
+/* Contact Footer Section */
+footer {
+    border-top: 1px solid var(--border-color);
+    background: #03050c;
+    padding: 70px 0 30px 0;
+    margin-top: 60px;
 }
 
 .Contacto {
     position: relative;
-    top: 40px;
-    left: 40px;
-    padding-bottom: 40px;
 }
 
-.social {
-    position: absolute;
-    left: 500px;
-    bottom: 40px;
+.Contacto .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+}
+
+.Contacto h2 {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 28px;
+    color: var(--text-primary);
+}
+
+/* Contact Lists & Items */
+.contact-info,
+.social-info {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.contact-item .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--color-secondary);
+    border: 1px solid var(--border-color);
+    flex-shrink: 0;
+    transition: var(--transition-fast);
+}
+
+.contact-item:hover .icon {
+    background: rgba(0, 242, 254, 0.1);
+    color: var(--color-primary);
+    border-color: var(--border-glow);
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-secondary);
+}
+
+.contact-link {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: var(--transition-fast);
+}
+
+.contact-link:hover {
+    color: var(--color-primary);
+}
+
+/* Footer Bottom Copyright */
+.footer-bottom {
+    margin-top: 50px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.footer-bottom p {
+    font-weight: 300;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 992px) {
+    .Inicio h2 {
+        font-size: 2.4rem;
+    }
+}
+
+@media (max-width: 768px) {
+
+    /* Navigation Menu Toggle Active State */
+    .menu-toggle {
+        display: flex;
+    }
+
+    .opciones {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        height: 0;
+        background: rgba(6, 9, 19, 0.98);
+        overflow: hidden;
+        transition: var(--transition-normal);
+        border-bottom: 0 solid var(--border-color);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+    }
+
+    .opciones.active {
+        height: 200px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .opciones ul {
+        flex-direction: column;
+        padding: 30px 0;
+        gap: 20px;
+    }
+
+    /* Hamburger animation */
+    .menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(6px, -7px);
+    }
+
+    /* Hero section */
+    .Inicio {
+        padding: 90px 0 60px 0;
+    }
+
+    .Inicio h2 {
+        font-size: 2rem;
+    }
+
+    .Inicio p {
+        font-size: 1rem;
+        margin-bottom: 28px;
+    }
+
+    /* Grid sections */
+    .Contacto .container {
+        grid-template-columns: 1fr;
+        gap: 36px;
+    }
+}
+
+@media (max-width: 480px) {
+    html {
+        font-size: 15px;
+    }
+
+    .brand h1 {
+        font-size: 1.25rem;
+    }
+
+    #logoMzt {
+        height: 38px;
+    }
+
+    .Inicio h2 {
+        font-size: 1.75rem;
+    }
+
+    .card {
+        padding: 24px 20px;
+    }
+
+    .Contacto h2 {
+        font-size: 1.5rem;
+    }
 }
