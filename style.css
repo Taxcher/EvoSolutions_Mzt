@@ -389,10 +389,10 @@ footer {
     position: relative;
 }
 
-.Contacto .container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
+.Contacto > .container:first-child{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:48px;
 }
 
 .Contacto h2 {
@@ -463,17 +463,22 @@ footer {
 }
 
 /* Footer Bottom Copyright */
-.footer-bottom {
-    margin-top: 50px;
-    padding-top: 24px;
-    border-top: 1px solid var(--border-color);
-    text-align: center;
-    font-size: 0.85rem;
+.footer-bottom{
+    display:block !important;
+    width:100%;
+    margin-top:50px;
+    font-size: 0.95rem;
+    font-weight: 300;
+    padding-top:24px;
+    border-top:1px solid var(--border-color);
+    text-align:center;
     color: var(--text-secondary);
 }
 
 .footer-bottom p {
     font-weight: 300;
+    margin: 0 auto;
+    max-width: 600px;
 }
 
 /* Card Carousels Styling */
