@@ -4,6 +4,18 @@
  * It dynamically constructs the sliding track, navigation arrows, and dots from basic <img> markup.
  */
 
+window.addEventListener('load', function () {
+    const preloader = document.getElementById('preloader');
+
+    // Opcional: una pequeña transición de opacidad
+    preloader.style.opacity = '0';
+
+    // Eliminamos el preloader del DOM cuando termine la animación
+    setTimeout(function () {
+        preloader.style.display = 'none';
+    }, 500); // El tiempo debe coincidir con la transición del CSS
+});
+
 document.addEventListener("DOMContentLoaded", () => {
     const carousels = document.querySelectorAll(".card-carousel");
 
@@ -23,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
         originalImgs.forEach((img) => {
             const slide = document.createElement("div");
             slide.className = "carousel-slide";
-            
+
             // Clone the image to preserve attributes and styles
             const clonedImg = img.cloneNode(true);
             slide.appendChild(clonedImg);
@@ -143,7 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // 6. Pause autoplay on hover for better UX
         // We pause autoplay when the user hovers over the parent card
         const cardParent = carousel.closest(".card") || carousel;
-        
+
         cardParent.addEventListener("mouseenter", () => {
             stopAutoplay();
         });
